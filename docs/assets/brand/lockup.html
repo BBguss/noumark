@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Source for the logo lockups (icon + wordmark). Render with a headless browser:
+     msedge --headless=new --default-background-color=00000000 --window-size=1120,300 \
+       --screenshot=../logo-lockup-light.png "lockup.html?light"    (and "?dark") -->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  body { width: 1120px; height: 300px; display: flex; align-items: center; gap: 44px; padding: 0 60px; box-sizing: border-box; font-family: Inter, 'Segoe UI', sans-serif; }
+  img { width: 200px; height: 200px; filter: drop-shadow(0 14px 24px rgba(31, 85, 214, 0.35)); }
+  .word { position: relative; font-size: 150px; font-weight: 800; letter-spacing: -0.055em; line-height: 1; color: #3978f6; padding-bottom: 26px; }
+  .word span { color: #17191f; }
+  .word::after { content: ''; position: absolute; left: 6px; bottom: 0; width: 80%; height: 11px; border-radius: 11px; background: linear-gradient(90deg, #1f55d6, #3978f6 55%, #8fb6ff); }
+  .tag { position: absolute; left: 6px; top: 100%; margin-top: 14px; font-size: 30px; font-weight: 500; letter-spacing: -0.01em; color: #6b7280; white-space: nowrap; display: none; }
+  .dark .word { color: #5b93ff; }
+  .dark .word span { color: #ffffff; }
+</style>
+</head>
+<body>
+  <img src="../logo.svg" alt="">
+  <div class="word"><span>nou</span>mark</div>
+  <script>if (location.search.includes('dark')) document.body.classList.add('dark');</script>
+</body>
+</html>

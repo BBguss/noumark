@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noumark</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="titlebar" data-tauri-drag-region>
+        <div class="tb-group">
+          <div class="brand" data-tauri-drag-region><span class="brand-mark"></span></div>
+          <button class="icon-btn" id="btn-sidebar" data-icon="sidebar" title="Files (Ctrl+B)"></button>
+          <button class="icon-btn" id="btn-back" data-icon="back" title="Back (Alt+←)" disabled></button>
+          <button class="icon-btn" id="btn-forward" data-icon="forward" title="Forward (Alt+→)" disabled></button>
+        </div>
+        <div class="tb-title" data-tauri-drag-region>
+          <span id="doc-title" data-tauri-drag-region>Noumark</span>
+          <span id="save-state" data-tauri-drag-region></span>
+        </div>
+        <div class="tb-group">
+          <button class="search-pill" id="btn-palette" title="Command palette (Ctrl+K)">
+            <span data-icon="search" data-size="15"></span><span class="pill-text">Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-btn" id="btn-mode" data-icon="edit" title="Edit source (Ctrl+E)"></button>
+          <button class="icon-btn" id="btn-outline" data-icon="outline" title="Outline (Ctrl+\)"></button>
+          <button class="icon-btn" id="btn-theme" title="Theme (Ctrl+T)"></button>
+          <button class="icon-btn" id="btn-settings" data-icon="settings" title="Settings (Ctrl+,)"></button>
+          <div class="win-controls">
+            <button id="win-min" title="Minimize">&#xE921;</button>
+            <button id="win-max" title="Maximize">&#xE922;</button>
+            <button id="win-close" title="Close">&#xE8BB;</button>
+          </div>
+        </div>
+      </header>
+      <div id="progress"><div id="progress-bar"></div></div>
+
+      <div id="body">
+        <aside id="sidebar">
+          <div class="side-head">
+            <span data-icon="folder" data-size="15"></span>
+            <span id="root-name">No folder</span>
+          </div>
+          <div class="side-filter">
+            <input id="side-filter" placeholder="Filter files" spellcheck="false" />
+          </div>
+          <nav id="tree"></nav>
+          <div class="resizer" id="rz-side" title="Drag to resize · double-click to reset"></div>
+        </aside>
+
+        <main id="main">
+          <div id="editor-pane">
+            <textarea id="source" spellcheck="false" placeholder="Start writing…"></textarea>
+          </div>
+          <div id="scroller">
+            <article id="doc" class="markdown"></article>
+          </div>
+        </main>
+
+        <aside id="outline">
+          <div class="resizer" id="rz-toc" title="Drag to resize · double-click to reset"></div>
+          <div class="outline-head">On this page</div>
+          <nav id="toc"></nav>
+        </aside>
+      </div>
+
+      <footer id="statusbar">
+        <span id="st-path"></span>
+        <span class="spacer"></span>
+        <span id="st-words"></span>
+        <span id="st-time"></span>
+        <span id="st-zoom"></span>
+        <button id="st-width" title="Content width — click to cycle (Ctrl+[ / Ctrl+])"></button>
+        <span id="st-mode">Reading</span>
+      </footer>
+    </div>
+
+    <div id="palette" hidden>
+      <div class="palette-card">
+        <div class="palette-input">
+          <span data-icon="search" data-size="17"></span>
+          <input id="palette-input" spellcheck="false" placeholder="Search files · # headings · > commands" />
+        </div>
+        <div id="palette-list"></div>
+        <div class="palette-foot">
+          <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> open</span><span><kbd>#</kbd> headings</span><span><kbd>&gt;</kbd> commands</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="findbar" hidden>
+      <span data-icon="search" data-size="15"></span>
+      <input id="find-input" spellcheck="false" placeholder="Find in document" />
+      <span id="find-count"></span>
+      <button class="icon-btn sm" id="find-prev" data-icon="up" data-size="15" title="Previous (Shift+Enter)"></button>
+      <button class="icon-btn sm" id="find-next" data-icon="down" data-size="15" title="Next (Enter)"></button>
+      <button class="icon-btn sm" id="find-close" data-icon="x" data-size="15" title="Close (Esc)"></button>
+    </div>
+
+    <div id="settings" hidden>
+      <div class="settings-card" role="dialog" aria-label="Settings"></div>
+    </div>
+
+    <div id="drop-overlay"><div>Drop to open</div></div>
+    <div id="toast"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

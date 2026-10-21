@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- Source for social-banner.png (1280x640, the GitHub social preview). Render with:
+     msedge --headless=new --window-size=1280,640 --screenshot=../social-banner.png banner.html -->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    position: relative; font-family: Inter, 'Segoe UI', sans-serif; color: #17191f;
+    background:
+      radial-gradient(760px 520px at 92% 18%, rgba(57, 120, 246, 0.22), transparent 62%),
+      radial-gradient(620px 420px at 6% 104%, rgba(57, 120, 246, 0.12), transparent 60%),
+      #f4f7fd;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(23, 25, 31, 0.045) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(23, 25, 31, 0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(760px 520px at 24% 50%, #000 15%, transparent 75%);
+  }
+  .copy { position: absolute; left: 76px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+  .lockup { display: flex; align-items: center; gap: 24px; }
+  .lockup img { width: 104px; height: 104px; filter: drop-shadow(0 14px 24px rgba(31, 85, 214, 0.35)); }
+  .word { position: relative; font-size: 84px; font-weight: 800; letter-spacing: -0.055em; line-height: 1; color: #3978f6; padding-bottom: 16px; }
+  .word span { color: #17191f; }
+  .word::after { content: ''; position: absolute; left: 3px; bottom: 0; width: 80%; height: 6px; border-radius: 6px; background: linear-gradient(90deg, #1f55d6, #3978f6 55%, #8fb6ff); }
+  h2 { margin: 40px 0 0; font-size: 40px; font-weight: 800; letter-spacing: -0.03em; }
+  h2 em { font-style: normal; color: #3978f6; }
+  p { margin: 12px 0 0; font-size: 23px; line-height: 1.4; color: #6b7280; font-weight: 500; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 9px; padding: 10px 17px; border-radius: 999px;
+    font-size: 16px; font-weight: 600; color: #17191f; background: #e7eefc; border: 1px solid rgba(57, 120, 246, 0.16);
+  }
+  .chip svg { width: 18px; height: 18px; color: #3978f6; }
+  .shot {
+    position: absolute; left: 656px; top: 96px; width: 820px; border-radius: 14px; overflow: hidden;
+    transform: perspective(1600px) rotateY(-15deg) rotateX(3deg); transform-origin: left center;
+    box-shadow: 0 50px 90px -24px rgba(23, 41, 90, 0.45), 0 0 0 1px rgba(23, 25, 31, 0.1);
+  }
+  .shot img { display: block; width: 100%; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="copy">
+    <div class="lockup"><img src="../logo.svg" alt=""><div class="word"><span>nou</span>mark</div></div>
+    <h2>Open. Read. <em>Focus.</em></h2>
+    <p>A fast, beautiful Markdown reader &amp; editor for Windows.</p>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Lightweight</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10 4.5v7H3zM11 4.4 21 3v8.5H11zM3 12.5h7v7l-7-1zM11 12.5h10V21l-10-1.4z"/></svg>Native</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Developer-friendly</span>
+      <span class="chip">Open source · MIT</span>
+    </div>
+  </div>
+  <div class="shot"><img src="app-light.png" alt=""></div>
+</body>
+</html>

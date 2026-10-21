@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Noumark app icon: a blue document tile with a folded corner and a bold "N". -->
+  <defs>
+    <linearGradient id="tile" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#5A9BFF"/>
+      <stop offset="0.5" stop-color="#3978F6"/>
+      <stop offset="1" stop-color="#1F55D6"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DCE8FF"/>
+      <stop offset="1" stop-color="#A9C6FF"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="-10" dy="14" stdDeviation="14" flood-color="#0B2A7A" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <path id="shape" d="M264 64H700Q730 64 751 85L939 273Q960 294 960 324V760A200 200 0 0 1 760 960H264A200 200 0 0 1 64 760V264A200 200 0 0 1 264 64Z" fill="url(#tile)"/>
+  <path d="M264 64H700Q730 64 751 85L939 273Q960 294 960 324V760A200 200 0 0 1 760 960H264A200 200 0 0 1 64 760V264A200 200 0 0 1 264 64Z" fill="url(#sheen)"/>
+  <path d="M730 70V224Q730 294 800 294H954Z" fill="url(#fold)" stroke="url(#fold)" stroke-width="10" stroke-linejoin="round" filter="url(#soft)"/>
+  <path d="M302 772V352H426L598 606V352H722V772H598L426 518V772Z" fill="#ffffff" stroke="#ffffff" stroke-width="22" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,53 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug! Please search existing issues first.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a file containing …
+        2. Double-click …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample Markdown
+      description: If the problem depends on the document, paste a minimal example.
+      render: markdown
+  - type: input
+    id: version
+    attributes:
+      label: Noumark version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 23H2"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installed or portable?
+      options: [Installer, Portable exe, Built from source]
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or additional context
