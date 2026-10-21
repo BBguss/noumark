@@ -1,0 +1,20 @@
+# dependencies & build output
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+release/
+
+# generated icons for platforms we don't ship
+src-tauri/icons/android/
+src-tauri/icons/ios/
+src-tauri/icons/Square*.png
+src-tauri/icons/StoreLogo.png
+src-tauri/icons/*.icns
+
+# editors & OS
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db

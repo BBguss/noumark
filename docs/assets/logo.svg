@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Noumark: "n↓", a nod to the Markdown mark (M↓). -->
+  <defs>
+    <linearGradient id="bg" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#8F75FF"/>
+      <stop offset="0.5" stop-color="#5A44F2"/>
+      <stop offset="1" stop-color="#2A1C9C"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="232" fill="url(#bg)"/>
+  <rect x="48" y="48" width="928" height="928" rx="232" fill="url(#sheen)"/>
+  <rect x="49.5" y="49.5" width="925" height="925" rx="230.5" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="3"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(-27 12)">
+    <path d="M246 300V740M246 440a140 140 0 0 1 280 0V740" stroke="#ffffff" stroke-width="112"/>
+    <path d="M752 300V732M672 652l80 80 80-80" stroke="#7DF3D6" stroke-width="96"/>
+  </g>
+</svg>

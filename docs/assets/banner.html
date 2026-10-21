@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- Source for social-banner.png (1280x640). Render with a headless browser:
+     msedge --headless=new --screenshot=social-banner.png --window-size=1280,640 banner.html -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    position: relative;
+    font-family: 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
+    background:
+      radial-gradient(900px 520px at 88% 30%, rgba(125, 98, 255, 0.45), transparent 60%),
+      radial-gradient(600px 400px at 0% 100%, rgba(125, 243, 214, 0.14), transparent 60%),
+      linear-gradient(135deg, #0e0b22 0%, #17123d 55%, #221a5c 100%);
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(800px 500px at 25% 50%, #000 20%, transparent 75%);
+  }
+  .copy { position: absolute; left: 76px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+  .logo { width: 104px; height: 104px; filter: drop-shadow(0 18px 40px rgba(90, 68, 242, 0.65)); }
+  h1 { margin: 26px 0 0; font-size: 92px; line-height: 1; font-weight: 700; letter-spacing: -0.045em; }
+  h1 span { color: #7df3d6; }
+  p { margin: 20px 0 0; font-size: 27px; line-height: 1.35; color: #c9c3f5; font-family: 'Segoe UI Variable Text', 'Segoe UI', sans-serif; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .chip {
+    padding: 8px 15px; border-radius: 999px; font-size: 16px; font-weight: 600;
+    background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.14); color: #e8e4ff;
+    font-family: 'Segoe UI Variable Text', 'Segoe UI', sans-serif;
+  }
+  .chip.accent { background: rgba(125, 243, 214, 0.12); border-color: rgba(125, 243, 214, 0.4); color: #9df7e1; }
+  .shot {
+    position: absolute; left: 640px; top: 92px; width: 820px;
+    border-radius: 14px; overflow: hidden;
+    transform: perspective(1600px) rotateY(-16deg) rotateX(4deg);
+    transform-origin: left center;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+  .shot img { display: block; width: 100%; }
+  .shot::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255,255,255,0.08), transparent 40%); }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="copy">
+    <img class="logo" src="logo.svg" alt="">
+    <h1>Noumark<span>.</span></h1>
+    <p>The fast, beautiful Markdown reader &amp; editor for Windows.</p>
+    <div class="chips">
+      <span class="chip">Block editing</span>
+      <span class="chip">Live reload</span>
+      <span class="chip">9 themes</span>
+      <span class="chip">Rust + Tauri</span>
+      <span class="chip accent">Open source · MIT</span>
+    </div>
+  </div>
+  <div class="shot"><img src="screenshot-dark.png" alt=""></div>
+</body>
+</html>
