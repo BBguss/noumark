@@ -38,6 +38,9 @@ md.core.ruler.push('noumark', (st) => {
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i];
     if (t.level === 0 && t.map && t.nesting !== -1) t.attrSet('data-src', `${t.map[0]}:${t.map[1]}`);
+    // Every rendered block (paragraphs, list items, table rows…) also gets its
+    // own line range, which the formatting toolbar uses to locate selections.
+    if (t.map && t.nesting === 1 && !t.hidden) t.attrSet('data-ln', `${t.map[0]}:${t.map[1]}`);
 
     if (t.type === 'heading_open') {
       const text = tokens[i + 1].children

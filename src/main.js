@@ -4,6 +4,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 import { open as openDialog } from '@tauri-apps/plugin-dialog';
 import { render } from './md.js';
+import { createFormatBar } from './format.js';
 import { icon, hydrateIcons } from './icons.js';
 import { LIGHT, DARK, ACCENTS, WIDTHS, WIDTH_MIN, WIDTH_MAX, applyPalette, accentColor } from './theme.js';
 import './style.css';
@@ -73,6 +74,8 @@ const state = {
   saveTimer: null,
   blockEdit: null,
   pendingReload: false,
+  undo: [],
+  redo: [],
 };
 
 // ───────────────────────── helpers ─────────────────────────
@@ -114,6 +117,7 @@ function blockText(el, lines) {
 
 function renderDoc({ flash = false } = {}) {
   if (!state.path) return;
+  fmtbar?.hide();
   const { html, toc, words } = render(state.source);
   docEl.innerHTML = html;
   state.toc = toc;
@@ -240,6 +244,8 @@ async function openFile(path, opts = {}) {
   state.source = text.replace(/\r\n/g, '\n');
   state.lastWritten = state.source;
   state.blocks = new Set();
+  state.undo = [];
+  state.redo = [];
   app.classList.remove('welcome');
 
   if (state.mode === 'edit') sourceEl.value = state.source;
@@ -345,6 +351,8 @@ async function reloadFromDisk() {
   if (norm === state.source) return;
   state.source = norm;
   state.lastWritten = norm;
+  state.undo = [];
+  state.redo = [];
   if (state.mode === 'edit') {
     const { selectionStart, selectionEnd, scrollTop } = sourceEl;
     sourceEl.value = norm;
@@ -461,10 +469,8 @@ function commitBlockEdit() {
   }
   const lines = sourceLines();
   lines.splice(be.a, be.b - be.a, ...be.ta.value.split('\n'));
-  state.source = lines.join('\n');
   state.blockEdit = null;
-  scheduleSave(true);
-  renderDoc({ flash: true });
+  commitSource(lines.join('\n'), { flash: true });
   finishBlockEdit();
 }
 
@@ -480,10 +486,48 @@ function toggleTask(line) {
   const m = lines[line]?.match(/^(\s*(?:>\s*)*(?:[-*+]|\d+[.)])\s+\[)([ xX])(\])/);
   if (!m) return;
   lines[line] = m[1] + (m[2] === ' ' ? 'x' : ' ') + m[3] + lines[line].slice(m[0].length);
-  state.source = lines.join('\n');
-  scheduleSave(true);
-  renderDoc();
+  commitSource(lines.join('\n'));
 }
+
+// Every edit made from reading mode goes through here so it can be undone.
+function commitSource(next, { flash = false } = {}) {
+  if (next === state.source) return;
+  state.undo.push(state.source);
+  if (state.undo.length > 200) state.undo.shift();
+  state.redo = [];
+  state.source = next;
+  scheduleSave(true);
+  renderDoc({ flash });
+}
+
+function stepHistory(from, to, label) {
+  const prev = from.pop();
+  if (prev === undefined) return toast(`Nothing to ${label.toLowerCase()}`);
+  to.push(state.source);
+  state.source = prev;
+  scheduleSave(true);
+  renderDoc({ flash: true });
+}
+
+const undo = () => stepHistory(state.undo, state.redo, 'Undo');
+const redo = () => stepHistory(state.redo, state.undo, 'Redo');
+
+const fmtbar = createFormatBar({
+  docEl,
+  enabled: () => state.mode === 'read' && !!state.path && !state.blockEdit,
+  getSource: () => state.source,
+  commit: (next) => commitSource(next),
+  docDir: () => state.path && dirname(state.path),
+  pickImage: () =>
+    openDialog({
+      multiple: false,
+      directory: false,
+      defaultPath: state.path ? dirname(state.path) : undefined,
+      filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'avif'] }],
+    }).catch(() => null),
+  editBlock: (el) => startBlockEdit(el),
+  toast,
+});
 
 function insertAtCursor(ta, text) {
   const { selectionStart: s, selectionEnd: e } = ta;
@@ -504,6 +548,7 @@ function wrapSelection(ta, mark) {
 function setMode(mode) {
   if (!state.path) return;
   if (state.blockEdit) commitBlockEdit();
+  fmtbar.hide();
   state.mode = mode;
   app.classList.toggle('editing', mode === 'edit');
   const btn = $('#btn-mode');
@@ -1054,7 +1099,7 @@ function showWelcome() {
   const shortcuts = [
     ['Ctrl K', 'Command palette'],
     ['Ctrl E', 'Edit source'],
-    ['Double-click', 'Edit any block'],
+    ['Select text', 'Format in place'],
     ['Ctrl F', 'Find'],
     ['Ctrl .', 'Focus mode'],
     ['Ctrl ,', 'Themes & layout'],
@@ -1119,6 +1164,10 @@ docEl.addEventListener('click', (e) => {
 docEl.addEventListener('dblclick', (e) => {
   if (state.mode !== 'read' || !state.path) return;
   if (e.target.closest('a, input, button, .block-editor')) return;
+  // Double-clicking a word selects it and shows the formatting toolbar; blocks
+  // without editable text (code, diagrams, math, images) open their Markdown.
+  const special = e.target.closest('.code-block, .mermaid, .katex, .frontmatter, pre, img, hr');
+  if (!special && window.getSelection()?.toString().trim()) return;
   let el = e.target.closest('[data-src]');
   while (el && el.parentElement !== docEl) el = el.parentElement.closest('[data-src]');
   if (!el) return;
@@ -1152,6 +1201,7 @@ sourceEl.addEventListener('scroll', () => {
 });
 
 scroller.addEventListener('scroll', onScroll, { passive: true });
+scroller.addEventListener('scroll', () => fmtbar.reposition(), { passive: true });
 
 $('#toc').addEventListener('click', (e) => {
   const a = e.target.closest('a');
@@ -1240,6 +1290,12 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     return openPalette(e.shiftKey ? '>' : '');
   }
+  if (fmtbar.handleKey(e)) return;
+  const typing = e.target.closest?.('textarea, input, [contenteditable]');
+  if (ctrl && !typing && state.mode === 'read' && state.path) {
+    if (k === 'z' && !e.shiftKey) return e.preventDefault(), undo();
+    if (k === 'y' || (k === 'z' && e.shiftKey)) return e.preventDefault(), redo();
+  }
   if (ctrl && k === 'o') return e.preventDefault(), pickFile();
   if (ctrl && k === 'e') return e.preventDefault(), setMode(state.mode === 'edit' ? 'read' : 'edit');
   if (ctrl && k === 'b') return e.preventDefault(), toggleSidebar();
@@ -1259,6 +1315,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'F5') return e.preventDefault(), reloadFromDisk();
   if (ctrl && (k === 'r' || k === 'g' || k === 'u' || k === 'j')) return e.preventDefault();
   if (e.key === 'Escape') {
+    if (fmtbar.visible) return fmtbar.hide(), window.getSelection()?.removeAllRanges();
     if (!$('#palette').hidden) return closePalette();
     if (!$('#settings').hidden) return closeSettings();
     if (!$('#findbar').hidden) return closeFind();

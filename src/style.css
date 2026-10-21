@@ -522,6 +522,47 @@ kbd {
 #find-input { width: 200px; }
 #find-count { font-size: 11.5px; min-width: 56px; text-align: right; color: var(--faint); font-variant-numeric: tabular-nums; }
 
+/* ───────────── formatting toolbar ───────────── */
+#fmtbar {
+  position: fixed; left: 0; top: 0; z-index: 45;
+  padding: 4px; border-radius: 11px; color: var(--text-2);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: var(--shadow-lg);
+  animation: fb-in 0.14s var(--ease);
+  user-select: none;
+}
+#fmtbar[hidden], #fmtbar [hidden] { display: none !important; }
+@keyframes fb-in { from { opacity: 0; } }
+.fb-row { display: flex; align-items: center; gap: 1px; }
+.fb-btn {
+  border: 0; background: transparent; cursor: pointer;
+  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px;
+  color: inherit; transition: background 0.12s, color 0.12s;
+}
+.fb-btn:hover:not(:disabled) { background: var(--hover); color: var(--text); }
+.fb-btn.on { background: var(--accent-soft); color: var(--accent-text); }
+.fb-btn:disabled { opacity: 0.3; cursor: default; }
+.fb-sep { width: 1px; height: 18px; margin: 0 4px; background: var(--border-strong); }
+.fb-form { gap: 4px; padding-left: 8px; color: var(--muted); }
+.fb-form-icon { display: grid; }
+.fb-form input { border: 0; outline: 0; background: transparent; width: 260px; height: 30px; font-size: 13px; color: var(--text); }
+.fb-form .fb-ok { background: var(--accent); color: #fff; }
+.fb-form .fb-ok:hover { background: color-mix(in srgb, var(--accent) 85%, black); color: #fff; }
+.fb-menu {
+  position: absolute; top: calc(100% + 6px); min-width: 168px; padding: 4px; border-radius: 10px;
+  background: var(--surface); box-shadow: var(--shadow-lg); animation: drop 0.14s var(--ease);
+}
+#fmtbar.below .fb-menu { top: auto; bottom: calc(100% + 6px); }
+.fb-item {
+  border: 0; background: transparent; cursor: pointer;
+  display: block; width: 100%; text-align: left; padding: 7px 10px; border-radius: 7px;
+  font-size: 13px; color: var(--text-2);
+}
+.fb-item:hover { background: var(--hover); color: var(--text); }
+.fb-item.on { color: var(--accent-text); font-weight: 600; }
+::highlight(fmt-pending) { background: var(--accent-soft); }
+
 /* ───────────── toast & drop ───────────── */
 #toast {
   position: fixed; left: 50%; bottom: 44px; z-index: 60;

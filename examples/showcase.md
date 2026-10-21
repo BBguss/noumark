@@ -6,7 +6,7 @@ tags: demo, markdown
 
 # Welcome to Noumark
 
-Noumark is a **fast**, *beautiful* Markdown reader. Double-click any paragraph to edit just that block, then press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to save it.
+Noumark is a **fast**, *beautiful* Markdown reader. Select any text to format it in place with the toolbar, even inside a table cell. <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes.
 
 > Tip: press <kbd>Ctrl</kbd>+<kbd>K</kbd> to jump to any file, heading (`#`) or command (`>`), and <kbd>Ctrl</kbd>+<kbd>,</kbd> to change the theme, font and content width.
 

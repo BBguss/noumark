@@ -5,6 +5,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- Formatting toolbar in reading mode. Select text, including text inside table cells, to apply bold, italic, strikethrough, inline code, links, images, headings, quotes and bullet lists, or to insert and delete table rows and columns. The Markdown source is rewritten in place.
+- Undo and redo (`Ctrl+Z` / `Ctrl+Y`) for every edit made from reading mode.
+
+### Changed
+
+- Double-clicking a word now selects it and shows the toolbar. A block's Markdown opens from the toolbar's **Edit Markdown** button, or by double-clicking a code block, diagram or formula.
+
 ## [0.1.0] - 2026-10-21
 
 First public release.

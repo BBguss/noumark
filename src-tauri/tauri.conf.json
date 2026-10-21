@@ -43,7 +43,7 @@
     "license": "MIT",
     "category": "Productivity",
     "shortDescription": "Fast, beautiful Markdown reader & editor",
-    "longDescription": "Noumark opens Markdown files instantly with beautiful typography, themes, live reload, inline block editing and a command palette.",
+    "longDescription": "Noumark opens Markdown files instantly with beautiful typography, themes, live reload, a formatting toolbar for in-place editing and a command palette.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -62,7 +62,8 @@
     "windows": {
       "nsis": {
         "installMode": "currentUser",
-        "displayLanguageSelector": false
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico"
       },
       "webviewInstallMode": { "type": "downloadBootstrapper" }
     }

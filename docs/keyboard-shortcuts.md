@@ -43,9 +43,11 @@
 
 | Action | Shortcut |
 |---|---|
-| Edit a block | double-click it |
+| Formatting toolbar | select text (drag, or double-click a word) |
+| Bold / italic | <kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd> (with text selected, or in the source editor) |
+| Undo / redo (reading mode) | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> |
+| Edit a block's Markdown | **Edit Markdown** on the toolbar, or double-click a code block, diagram or formula |
 | Save block / cancel | <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Esc</kbd> |
 | Toggle source editor | <kbd>Ctrl</kbd>+<kbd>E</kbd> |
-| Bold / italic (source editor) | <kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd> |
 | Indent | <kbd>Tab</kbd> (inserts two spaces) |
 | Save now | <kbd>Ctrl</kbd>+<kbd>S</kbd> (saving is automatic anyway) |

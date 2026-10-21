@@ -62,9 +62,25 @@ Press <kbd>Ctrl</kbd>+<kbd>.</kbd> to hide the side panels and title bar control
 
 Noumark saves automatically. There's no unsaved state to lose and no save dialog. The file keeps its original line endings (CRLF or LF).
 
+### Formatting toolbar
+
+Select some text while reading (drag across it, or double-click a word) and a small toolbar appears above it. It edits the Markdown for you, so the rendered document stays readable. It works everywhere text appears, including inside table cells.
+
+| Button | What it does |
+|---|---|
+| **Bold** · *Italic* · ~~Strike~~ · `Code` | Wraps the selection in `**` · `*` · `~~` · `` ` ``. Click again to remove the formatting. <kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd> work while the toolbar is showing. |
+| Link | Type or paste a URL and press <kbd>Enter</kbd>. On an existing link, it lets you change the URL or remove the link. |
+| Heading | Turns the paragraph into Heading 1–3, or back into normal text. |
+| Quote · List | Turns the block into a blockquote or a bullet list, or back. |
+| Image | Replaces the selection with an image. The selected text becomes its alt text. Paste a URL, or choose a file. Local files are linked with a path relative to the document. |
+| Table | Outside a table, inserts a new 3-column table below the block. Inside a table, it inserts or deletes rows and columns. |
+| Edit Markdown | Opens the block's Markdown source (see below). |
+
+Every change is saved straight away. <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes it and <kbd>Ctrl</kbd>+<kbd>Y</kbd> redoes it.
+
 ### Block editing
 
-**Double-click** any paragraph, heading, list, table, quote or code block. Only that block turns into an editor showing its Markdown source.
+To edit a block's Markdown directly, click **Edit Markdown** on the toolbar. You can also double-click a code block, diagram, formula or image. Only that block turns into an editor showing its Markdown source.
 
 - <kbd>Ctrl</kbd>+<kbd>Enter</kbd> saves the block and renders it again.
 - <kbd>Esc</kbd> discards your changes to the block.

@@ -33,14 +33,15 @@ Opening a full IDE for that is slow and heavy. Noumark is built for exactly this
 
 - **Instant.** It's a native window with a small Rust core and the system WebView2, with no bundled browser engine. A single instance is reused, so later files open immediately.
 - **Read-first.** Good typography, an outline, reading progress and comfortable widths, so documentation reads like documentation.
-- **Edit in place.** Double-click a paragraph, table or code block to edit just that block's Markdown. No mode switch, no separate preview pane.
+- **Edit in place.** Select text to get a formatting toolbar: bold, italic, links, images, headings, tables and more, even inside table cells. You can also open the Markdown of just one block. No mode switch, no separate preview pane.
 - **Stays in sync.** If the file changes on disk (from `git pull`, an agent or another editor), the view updates and changed blocks are highlighted.
 
 ## Features
 
 | | |
 |---|---|
-| **Block editing** | Double-click any block to edit its Markdown inline. <kbd>Ctrl</kbd>+<kbd>Enter</kbd> saves, <kbd>Esc</kbd> cancels. |
+| **Formatting toolbar** | Select text while reading to apply bold, italic, strikethrough, code, links, images, headings, quotes, lists and table rows/columns. The Markdown is rewritten for you. <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes. |
+| **Block editing** | Open any block's Markdown inline from the toolbar. <kbd>Ctrl</kbd>+<kbd>Enter</kbd> saves, <kbd>Esc</kbd> cancels. |
 | **Split editor** | <kbd>Ctrl</kbd>+<kbd>E</kbd> opens a source editor next to a live preview, with autosave. Line endings (CRLF/LF) are preserved. |
 | **Interactive tasks** | Click a `- [ ]` checkbox and the change is written back to the file. |
 | **Live reload** | External changes are picked up immediately, including atomic "save via rename" writes. |
